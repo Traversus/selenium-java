@@ -1,26 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('Prep') {
       steps {
-        sh 'mvn clean install'
-      }
-    }
-
-    stage('Report') {
-      parallel {
-        stage('Cucumber Report') {
-          steps {
-            cucumber '**/*.json'
-          }
-        }
-
-        stage('Serenity Report') {
-          steps {
-            sh 'mvn -B serenity:aggregate'
-          }
-        }
-
+        withMaven(maven: 'M3', jdk: 'JDK8')
       }
     }
 
