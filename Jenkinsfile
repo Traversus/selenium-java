@@ -3,13 +3,10 @@ pipeline {
   stages {
     stage('Prep') {
       steps {
-        withMaven(maven: 'M3', jdk: 'JDK8', publisherStrategy: 'IMPLICIT')
-      }
-    }
+        withMaven(maven: 'M3', jdk: 'JDK8', publisherStrategy: 'IMPLICIT') {
+          sh 'mvn clean'
+        }
 
-    stage('Build') {
-      steps {
-        sh 'mvn clean'
       }
     }
 
